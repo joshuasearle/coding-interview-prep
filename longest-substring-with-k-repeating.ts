@@ -8,6 +8,7 @@ function longestSubstringUtil(
   end: number,
   k: number
 ) {
+  console.log(text.slice(start, end), start, end);
   const length = end - start;
 
   // Base cases
@@ -26,7 +27,7 @@ function longestSubstringUtil(
   }
 
   // See if text is a valid string | O(n)
-  let pointer = 0;
+  let pointer = start;
   while (pointer < end && freqs[text[pointer]] >= k) {
     pointer++;
   }
@@ -38,31 +39,35 @@ function longestSubstringUtil(
   let substringStart = start;
   let current = start;
 
-  while (current < length) {
+  while (current < end) {
     if (freqs[text[current]] < k) {
-      let substringLength = longestSubstringUtil(
-        text,
-        substringStart,
-        current,
-        k
-      );
-      maxLength = Math.max(maxLength, substringLength);
+      if (current !== substringStart) {
+        let substringLength = longestSubstringUtil(
+          text,
+          substringStart,
+          current,
+          k
+        );
+        maxLength = Math.max(maxLength, substringLength);
+      }
       substringStart = current + 1;
     }
     current++;
   }
 
   // Check last substring
-  const lastSubstringLength = longestSubstringUtil(
-    text,
-    substringStart,
-    current,
-    k
-  );
-  maxLength = Math.max(maxLength, lastSubstringLength);
+  if (current !== substringStart) {
+    const lastSubstringLength = longestSubstringUtil(
+      text,
+      substringStart,
+      current,
+      k
+    );
+    maxLength = Math.max(maxLength, lastSubstringLength);
+  }
 
   // Return result
   return maxLength;
 }
 
-console.log(longestSubstring('abababcabab', 3));
+console.log(longestSubstring('aaabbbcdefcdefgggggggggggggggggcde', 3));
