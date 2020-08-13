@@ -40,10 +40,10 @@ class Trie(object):
             current = current[char]
         return current.end_of_word
 
-words = ['hello', 'world', 'bye', 'lsdjf', 'lsjdflksj', 'byebye', 'hi', 'no', 'noway']
+# words = ['hello', 'world', 'bye', 'lsdjf', 'lsjdflksj', 'byebye', 'hi', 'no', 'noway']
 
-t = Trie()
-for word in words:
-    t.add_word(word)
+# t = Trie()
+# for word in words:
+#     t.add_word(word)
 
-print('hello' in t)
+# print('hello' in t)
